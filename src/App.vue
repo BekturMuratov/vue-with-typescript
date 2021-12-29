@@ -1,34 +1,29 @@
 <template>
 <div class="app">
- <p>{{name}} - {{age}}</p>
- <button @click="changeName('Chuck')">change name</button>
- <button @click="changeAge('18')">change age</button>
+<JobList :jobs="jobs"/>
 </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref,  } from 'vue';
+import Job  from './types/job';
+import  JobList from './components/JobList.vue';
 
 
 export default defineComponent({
   name: 'App',
-  components: {},
-  data(){
-    return {
-      name: 'Link',
-      age: 25 as string | number,
-    }
+  components: {JobList},
+  setup(){
+    const jobs = ref<Job[]>([
+      {title:'frontend developer', company:'maddevs',salary:70000, id:'1'},
+      {title:'backend developer', company:'sun finance',salary:120000, id:'2'},
+      {title:'full stack developer', company:'growave',salary:150000, id:'3'},
+      {title:'frontend developer', company:'codify',salary:60000, id:'4'},
+      {title:'flutter developer', company:'oracle digital',salary:140000, id:'5'},
+    ])
+    return {jobs}
   },
-  methods:{
-    changeName(name:string){
-      this.name = name
-      return name
-    },
-    changeAge(age: number | string){
-      this.age = age
-      return age
-    }
-  }
+
 });
 </script>
 
